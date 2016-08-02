@@ -16,13 +16,14 @@ main = shakeArgs shakeOptions $ do
 
     "*.html" %> \outFile -> do
         let srcFile = outFile -<.> "hamlet"
-            layoutFile = "revealjs.hamlet"
+        let layoutFile = "revealjs.hamlet"
         need [srcFile, layoutFile, "build.hs"]
-        -- , "--to=revealjs"
-        -- , "--variable=theme:serif"
-        -- , "--variable=width:'100%'"
-        src <- liftIO $ readHamletTemplateFile defaultHamletSettings srcFile
-        slides <- liftIO $ renderHamletTemplate src mempty
-        layout <- liftIO $ readHamletTemplateFile defaultHamletSettings layoutFile
-        out <- liftIO $ renderHamletTemplate layout (Map.fromList [("slides", toHamletData slides)])
+        slides <- toHamletData <$> hamletFile srcFile mempty
+        let env = Map.singleton "slides" slides
+        out <- hamletFile layoutFile env
         writeFile' outFile $ renderHtml out
+
+  where
+    hamletFile srcFile hamletData = liftIO $ do
+        src <- readHamletTemplateFile defaultHamletSettings srcFile
+        renderHamletTemplate src hamletData

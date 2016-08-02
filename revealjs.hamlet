@@ -27,7 +27,7 @@ $doctype 5
     <body>
         <div class="reveal">
             <div class="slides">
-                #{slides}
+                ^{slides}
 
         <script src="reveal.js/lib/js/head.min.js"></script>
         <script src="reveal.js/js/reveal.js"></script>
