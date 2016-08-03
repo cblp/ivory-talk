@@ -54,14 +54,61 @@ $newline text
     <h3> Способ 1. Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
 
 <section>
-    <h3> Хеллоуворлд на <code>language-c-quote</code>
-    <pre>
-        <code .haskell data-trim>
-            \main = do
-            \    msg:_ &lt;- getArgs
-            \    putDoc $ ppr [cunit|
-            \        $esc:("#include &lt;stdio.h>")
-            \        int main() {
-            \            puts($string:msg);
-            \        }
-            \    |]
+    <section>
+        <h3> Хеллоуворлд на <code>language-c-quote</code>
+        <pre>
+            <code>
+                \main = do
+                \    msg:_ &lt;- getArgs
+                \    putDoc $ ppr [cunit|
+                \        $esc:("#include &lt;stdio.h>")
+                \        int main() {
+                \            puts($string:msg);
+                \        }
+                \    |]
+    <section>
+        <h3> Получившееся AST
+        <pre>
+            <code>
+                \[ EscDef "#include &lt;stdio.h>"
+                \, FuncDef
+                \    (OldFunc
+                \       (DeclSpec [] [] (Tint Nothing))
+                \       (Id "main")
+                \       (DeclRoot)
+                \       []
+                \       Nothing
+                \       [ BlockStm (Exp
+                \           (Just (FnCall (Var (Id "puts"))
+                \              [ Const ( StringConst
+                \                  "CoLaboratory:ruHaskell 2016" ) ] ) ) ) ] ) ]
+
+<section>
+    <h3> <code>language-c-quote</code>: плюсы
+    <ul>
+        <li> QuasiQuotes — можно писать почти как на C, #
+            код может поправить С-программист, не знающий Haskell
+        <li> проверка синтаксиса C при написании
+        <li> простые типы для работы с AST — #
+            при необходимости можно обработать AST привычными средствами (Generics, SYB...)
+        <li> антицитата <code>$esc</code> позволяет вставить произвольный код при необходимости
+
+<section>
+    <h3> <code>language-c-quote</code>: чего не хватает
+    <ul>
+        <li> всё ещё нет проверки корректности кода
+            <ul>
+                <li> то, что может проверить GCC, но можно бы ещё раньше
+                    <ul>
+                        <li> например, соответствие типов, дублирование символов
+                <li> то, чего не может проверить GCC
+                    <ul>
+                        <li> например, сильное соответствие типов, целочисленное переполнение #
+                            и т. д.
+        <li> всё ещё надо писать тривиальные тесты
+
+<section>
+    <h3> <code>language-c-quote</code>: подводные камни
+    <ul>
+        <li> не поддерживаются вложенные цитаты в антицитатах
+        <li> необходимость <code>$esc</code> для <code>#include</code>

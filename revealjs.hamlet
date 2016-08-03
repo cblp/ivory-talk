@@ -43,7 +43,10 @@ $doctype 5
                       condition: function() { return !document.body.classList; } },
                     { src: 'reveal.js/plugin/highlight/highlight.js',
                       async: true,
-                      callback: function() { hljs.initHighlightingOnLoad(); } },
+                      callback: function() {
+                        hljs.configure({languages: ['haskell']});
+                        hljs.initHighlightingOnLoad();
+                      } },
                     { src: 'reveal.js/plugin/notes/notes.js', async: true },
                     { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
                 ],
