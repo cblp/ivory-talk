@@ -1,0 +1,7 @@
+name:           dummy
+version:        0
+cabal-version:  >= 1.2
+build-type:     Simple
+
+library
+    build-depends: base, ivory, ivory-backend-c

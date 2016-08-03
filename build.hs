@@ -1,13 +1,5 @@
 #!/usr/bin/env stack
-{-  stack --resolver=lts-6.10
-    runhaskell  --package=ivory
-                --package=ivory-artifact
-                --package=ivory-backend-c
-                --package=ivory-opts
-                --package=language-c-quote
-                --package=shake
-                --package=shakespeare
--}
+-- stack runhaskell --package=.
 {-# OPTIONS -Wall -Werror #-}
 {-# LANGUAGE OverloadedStrings #-}
 

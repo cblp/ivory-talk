@@ -157,8 +157,7 @@ $newline text
         <li> код пишется <nobr>ни на C</nobr>, <nobr>ни на «настоящем»</nobr> Haskell,
             \ <nobr>а на «языке</nobr> Ivory»
         <li> «обычный» Haskell-код выполняется <nobr>во время</nobr> генерации C-кода
-        <li> Ivory-код <nobr>не выполняется</nobr>, <nobr>а проверяется</nobr>
-            \ <nobr>и транслируется</nobr> <nobr>в C</nobr>
+        <li> Ivory-код <nobr>не выполняется</nobr>, <nobr>а транслируется</nobr> <nobr>в C</nobr>
 
 <section>
     <section>
@@ -187,3 +186,13 @@ $newline text
                 \    puts("CoLaboratory:ruHaskell");
                 \    return (int32_t) 0;
                 \}
+
+<section>
+    <section>
+        <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов
+        <pre>
+            <code>
+    <section>
+        <h3> Сгенерированный код
+        <pre>
+            <code>
