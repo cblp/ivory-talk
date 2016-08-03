@@ -44,14 +44,14 @@ $newline text
         порождающие код <nobr>на C</nobr>
 
 <section>
-    <h3> Способ 0. Текстовая шаблонизация
+    <h2> Способ 0. Текстовая шаблонизация
     <ul>
         <li> просто
         <li> можно уменьшить boilerplate
         <li> но никаких существенных преимуществ перед обычным С
 
 <section>
-    <h3> Способ 1. Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
+    <h2> Способ 1. Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
 
 <section>
     <section>
@@ -112,3 +112,46 @@ $newline text
     <ul>
         <li> не поддерживаются вложенные цитаты в антицитатах
         <li> необходимость <code>$esc</code> для <code>#include</code>
+
+<section>
+    <h2> Способ 2. Библиотека-DSL Ivory
+
+<section>
+    <section>
+        <h3> Хеллоуворлд на Ivory
+        <pre>
+            <code>
+                \puts :: Def ('[IString] ':-> ())
+                \puts = importProc "puts" "stdio.h"
+                \
+                \cmain :: String -> Def ('[] ':-> Sint32)
+                \cmain msg = proc "main" $ body $ do
+                \    call_ puts (fromString msg)
+                \    ret 0
+                \
+                \hello :: String -> Module
+                \hello msg = package "ivory-hello" $ do
+                \    incl puts
+                \    incl (cmain msg)
+                \
+                \main :: IO ()
+                \main = do
+                \    msg:rest &lt;- getArgs
+                \    withArgs rest $ C.compile [hello msg] []
+    <section>
+        <h3> Сгенерированный код
+        <code> ivory-hello.h
+        <pre>
+            <code>
+                \#include &lt;stdio.h>
+                \#include "ivory.h"
+                \int32_t main(void);
+        <code> ivory-hello.c
+        <pre>
+            <code>
+                \#include "ivory-hello.h"
+                \
+                \int32_t main(void) {
+                \    puts("CoLaboratory:ruHaskell 2016");
+                \    return (int32_t) 0;
+                \}

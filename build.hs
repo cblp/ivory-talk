@@ -1,6 +1,12 @@
 #!/usr/bin/env stack
 {-  stack --resolver=lts-6.10
-    runhaskell --package=language-c-quote --package=shake --package=shakespeare
+    runhaskell  --package=ivory
+                --package=ivory-artifact
+                --package=ivory-backend-c
+                --package=ivory-opts
+                --package=language-c-quote
+                --package=shake
+                --package=shakespeare
 -}
 {-# OPTIONS -Wall -Werror #-}
 {-# LANGUAGE DeriveAnyClass        #-}
@@ -11,6 +17,8 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings     #-}
 
+import           Control.Monad
+import           Data.List
 import qualified Data.Map                        as Map
 import           Development.Shake
 import           Development.Shake.FilePath
@@ -48,9 +56,10 @@ main = shakeArgs shakeOptions $ do
         Stdout cCode <-
             command [Traced $ "runhaskell " ++ hsFile]
                 "runhaskell"  [ "-Wall", "-Werror"
-                              , hsFile, "CoLaboratory:ruHaskell 2016", "--src-dir=tmp"
+                              , hsFile, "CoLaboratory:ruHaskell 2016", "--src-dir=code"
                               ]
-        writeFile' cFile cCode
+        when ("languagec-" `isPrefixOf` takeFileName cFile) $
+            writeFile' cFile cCode
 
   where
 
