@@ -55,7 +55,7 @@ $newline text
 
 <section>
     <section>
-        <h3> Хеллоуворлд на <code>language-c-quote</code>
+        <h3> <code>language-c-quote</code>: хеллоуворлд
         <pre>
             <code>
                 \main = do
@@ -118,7 +118,7 @@ $newline text
 
 <section>
     <section>
-        <h3> Хеллоуворлд на Ivory
+        <h3> Ivory: хеллоуворлд
         <pre>
             <code>
                 \puts :: Def ('[IString] ':-> ())
@@ -129,12 +129,10 @@ $newline text
                 \    call_ puts (fromString msg)
                 \    ret 0
                 \
-                \hello :: String -> Module
                 \hello msg = package "ivory-hello" $ do
                 \    incl puts
                 \    incl (cmain msg)
                 \
-                \main :: IO ()
                 \main = do
                 \    msg:rest &lt;- getArgs
                 \    withArgs rest $ C.compile [hello msg] []
@@ -155,3 +153,12 @@ $newline text
                 \    puts("CoLaboratory:ruHaskell 2016");
                 \    return (int32_t) 0;
                 \}
+
+<section>
+    <h3> Ivory: особенности
+    <ul>
+        <li> код пишется <nobr>ни на C</nobr>, <nobr>ни на «настоящем»</nobr> Haskell, #
+            <nobr>а на «языке</nobr> Ivory»
+        <li> «обычный» Haskell-код выполняется <nobr>во время</nobr> генерации C-кода
+        <li> Ivory-код <nobr>не выполняется</nobr>, <nobr>а проверяется</nobr> #
+            <nobr>и транслируется</nobr> <nobr>в C</nobr>
