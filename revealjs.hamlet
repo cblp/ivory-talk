@@ -11,6 +11,8 @@ $doctype 5
         <link rel="stylesheet" href="reveal.js/css/reveal.css">
         <style type="text/css">code{white-space: pre;}</style>
         <link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
         <!-- Printing and PDF exports -->
         <script>
             var link = document.createElement( 'link' );
@@ -39,8 +41,11 @@ $doctype 5
                 dependencies: [
                     { src: 'reveal.js/lib/js/classList.js',
                       condition: function() { return !document.body.classList; } },
+                    { src: 'reveal.js/plugin/highlight/highlight.js',
+                      async: true,
+                      callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'reveal.js/plugin/notes/notes.js', async: true },
                     { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-                    { src: 'reveal.js/plugin/notes/notes.js', async: true }
                 ],
                 history: true,
                 slideNumber: true,

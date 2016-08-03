@@ -1,3 +1,5 @@
+$newline text
+
 <section>
     <h2> Производительный код <nobr>на Haskell</nobr>
     <p> Юрий Сыровецкий
@@ -53,5 +55,13 @@
 
 <section>
     <h3> Хеллоуворлд на <code>language-c-quote</code>
-    <code>
-        main :: IO ()
+    <pre>
+        <code .haskell data-trim>
+            \main = do
+            \    msg:_ &lt;- getArgs
+            \    putDoc $ ppr [cunit|
+            \        $esc:("#include &lt;stdio.h>")
+            \        int main() {
+            \            puts($string:msg);
+            \        }
+            \    |]
