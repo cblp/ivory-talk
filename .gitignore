@@ -1,2 +1,5 @@
 .shake/
+/code/*.c
+/code/*.exe
+/code/.tested
 /ivory-talk.html

@@ -1,7 +1,15 @@
 #!/usr/bin/env stack
--- stack --resolver=lts-6.10 runhaskell --package=shake --package=shakespeare
+{-  stack --resolver=lts-6.10
+    runhaskell --package=language-c-quote --package=shake --package=shakespeare
+-}
 {-# OPTIONS -Wall -Werror #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveAnyClass        #-}
+{-# LANGUAGE DeriveGeneric         #-}
+{-# LANGUAGE FlexibleContexts      #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE LambdaCase            #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings     #-}
 
 import qualified Data.Map                        as Map
 import           Development.Shake
@@ -11,19 +19,42 @@ import           Text.Hamlet.Runtime
 
 main :: IO ()
 main = shakeArgs shakeOptions $ do
-
-    want ["ivory-talk.html"]
+    want ["ivory-talk.html", "code/.tested"]
 
     "*.html" %> \outFile -> do
         let srcFile = outFile -<.> "hamlet"
         let layoutFile = "revealjs.hamlet"
-        need [srcFile, layoutFile, "build.hs"]
-        slides <- toHamletData <$> hamletFile srcFile mempty
+        need [srcFile, layoutFile]
+        slides <- toHamletData <$> renderHamletFile srcFile mempty
         let env = Map.singleton "slides" slides
-        out <- hamletFile layoutFile env
+        out <- renderHamletFile layoutFile env
         writeFile' outFile $ renderHtml out
 
+    "code/.tested" %> \out -> do
+        let examplesDir = "code"
+        codeExamples <- getDirectoryFiles examplesDir ["*.hs"]
+        need [examplesDir </> file -<.> "exe" | file <- codeExamples]
+        writeFile' out ""
+
+    "code/*.exe" %> \exeFile -> do
+        let cFile = exeFile -<.> "c"
+        need [cFile]
+        command_ [Traced $ "gcc " ++ cFile]
+            "gcc" ["-Wall", "-Wextra", "-Werror", "-o", exeFile, cFile]
+
+    "code/*.c" %> \cFile -> do
+        let hsFile = cFile -<.> "hs"
+        need [hsFile]
+        Stdout cCode <-
+            command [Traced $ "runhaskell " ++ hsFile]
+                "runhaskell"  [ "-Wall", "-Werror"
+                              , hsFile, "CoLaboratory:ruHaskell 2016", "--src-dir=tmp"
+                              ]
+        writeFile' cFile cCode
+
   where
-    hamletFile srcFile hamletData = liftIO $ do
-        src <- readHamletTemplateFile defaultHamletSettings srcFile
-        renderHamletTemplate src hamletData
+
+    renderHamletFile srcFile hamletData =
+        traced ("renderHamletFile " ++ srcFile) $ do
+            src <- readHamletTemplateFile defaultHamletSettings srcFile
+            renderHamletTemplate src hamletData

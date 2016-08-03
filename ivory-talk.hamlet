@@ -49,4 +49,9 @@
         <li> но никаких существенных преимуществ перед обычным С
 
 <section>
-    <h3> Способ 1. Библиотеки <br> <code>language-c</code> <br> <code>language-c-quote</code>
+    <h3> Способ 1. Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
+
+<section>
+    <h3> Хеллоуворлд на <code>language-c-quote</code>
+    <code>
+        main :: IO ()
