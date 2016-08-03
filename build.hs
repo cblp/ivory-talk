@@ -9,13 +9,7 @@
                 --package=shakespeare
 -}
 {-# OPTIONS -Wall -Werror #-}
-{-# LANGUAGE DeriveAnyClass        #-}
-{-# LANGUAGE DeriveGeneric         #-}
-{-# LANGUAGE FlexibleContexts      #-}
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE LambdaCase            #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import           Control.Monad
 import           Data.List
@@ -56,7 +50,7 @@ main = shakeArgs shakeOptions $ do
         Stdout cCode <-
             command [Traced $ "runhaskell " ++ hsFile]
                 "runhaskell"  [ "-Wall", "-Werror"
-                              , hsFile, "CoLaboratory:ruHaskell 2016", "--src-dir=code"
+                              , hsFile, "--src-dir=code"
                               ]
         when ("languagec-" `isPrefixOf` takeFileName cFile) $
             writeFile' cFile cCode

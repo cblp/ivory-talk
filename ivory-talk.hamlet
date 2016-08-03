@@ -159,3 +159,31 @@ $newline text
         <li> «обычный» Haskell-код выполняется <nobr>во время</nobr> генерации C-кода
         <li> Ivory-код <nobr>не выполняется</nobr>, <nobr>а проверяется</nobr>
             \ <nobr>и транслируется</nobr> <nobr>в C</nobr>
+
+<section>
+    <section>
+        <h3> Ivory: использование Haskell <nobr>для умных</nobr> макросов
+        <pre>
+            <code>
+                \class CPrint a where
+                \  cprint :: a -> Ivory eff ()
+                \
+                \instance CPrint Uint32 where
+                \  cprint n = call_ printf "%u\n" n
+                \
+                \instance CPrint IString where
+                \  cprint s = call_ puts s
+                \
+                \cmain = proc "main" $ body $ do
+                \  cprint (2016 :: Uint32)
+                \  cprint ("CoLaboratory:ruHaskell" :: IString)
+                \  ret 0
+    <section>
+        <h3> Сгенерированный код
+        <pre>
+            <code>
+                \int32_t main(void) {
+                \    printf("%u\n", (uint32_t) 2016U);
+                \    puts("CoLaboratory:ruHaskell");
+                \    return (int32_t) 0;
+                \}
