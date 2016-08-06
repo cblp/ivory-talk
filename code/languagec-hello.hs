@@ -31,5 +31,5 @@ main = do
 --                  (FnCall
 --                     (Var (Id "puts"))
 --                     [ Const
---                         ( StringConst ["\"CoLaboratory:ruHaskell 2016\""]
---                           "CoLaboratory:ruHaskell 2016" ) ] ) ) ) ] ) ]
+--                         ( StringConst ["\"CoLaboratory: ruHaskell 2016\""]
+--                           "CoLaboratory: ruHaskell 2016" ) ] ) ) ) ] ) ]

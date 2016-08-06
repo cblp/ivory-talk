@@ -81,7 +81,7 @@ $newline text
                 \       [ BlockStm (Exp
                 \           (Just (FnCall (Var (Id "puts"))
                 \              [ Const ( StringConst
-                \                  "CoLaboratory:ruHaskell 2016" ) ] ) ) ) ] ) ]
+                \                  "CoLaboratory: ruHaskell 2016" ) ] ) ) ) ] ) ]
 
 <section>
     <h3> <code>language-c-quote</code>: плюсы
@@ -147,7 +147,7 @@ $newline text
                 \#include "ivory-hello.h"
                 \
                 \int32_t main(void) {
-                \    puts("CoLaboratory:ruHaskell 2016");
+                \    puts("CoLaboratory: ruHaskell 2016");
                 \    return (int32_t) 0;
                 \}
 
@@ -175,7 +175,7 @@ $newline text
                 \
                 \cmain = proc "main" $ body $ do
                 \  cprint (2016 :: Uint32)
-                \  cprint ("CoLaboratory:ruHaskell" :: IString)
+                \  cprint ("CoLaboratory: ruHaskell" :: IString)
                 \  ret 0
     <section>
         <h3> Сгенерированный код
@@ -183,16 +183,75 @@ $newline text
             <code>
                 \int32_t main(void) {
                 \    printf("%u\n", (uint32_t) 2016U);
-                \    puts("CoLaboratory:ruHaskell");
+                \    puts("CoLaboratory: ruHaskell");
                 \    return (int32_t) 0;
                 \}
 
 <section>
     <section>
         <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов
-        <pre>
-            <code>
+
     <section>
-        <h3> Сгенерированный код
+        <h4> Пример: безопасный вызов <code>qsort</code>
+        <table .simple>
+            <tr>
+                <td>
+                    сигнатура <nobr>в C</nobr>
+                <td width="100%">
+                    <pre>
+                        <code class=c>
+                            \void
+                            \qsort(
+                            \    void * base,
+                            \    size_t nel,
+                            \    size_t width,
+                            \    int (* compar)(const void *, const void *)
+                            \);
+    <section>
+        <h4> Пример: безопасный вызов <code>qsort</code>
+        <table .simple>
+            <tr>
+                <td>
+                    импорт <nobr>в Ivory</nobr>
+                <td width="100%">
+                    <pre>
+                        <code>
+                            \_qsort :: Def ('[ Ptr s (Stored ())
+                            \                , Size
+                            \                , Size
+                            \                , Ptr s (Stored ()) ]
+                            \              :-> ())
+                            \_qsort = importProc "qsort" "stdlib.h"
+            <tr>
+                <td>
+                    безопасный интерфейс
+                <td width="100%">
+                    <pre>
+                        <code>
+                            \type CompareProc s a =
+                            \    Def ('[ ConstRef s (Stored a)
+                            \          , ConstRef s (Stored a) ]
+                            \        :-> IInt)
+                            \qsortBy :: CompareProc s a
+                            \        -> Ref s (Array n (Stored a))
+                            \        -> Ivory eff ()
+    <section>
+        <h4> Использование
         <pre>
             <code>
+                \cmp_u8_rev :: CompareProc s Uint8
+                \cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
+                \    x &lt;- deref px
+                \    y &lt;- deref py
+                \    ret $ safeCast x - safeCast y
+                \
+                \cmain :: Def ('[] ':-> IInt)
+                \cmain = proc "main" $ body $ do
+                \    let exampleData = "CoLaboratory: ruHaskell 2016"
+                \    exampleArray &lt;- local (iarray $
+                \        map (ival . fromIntegral . ord) exampleData
+                \        :: Init (AString 32))
+                \    puts exampleArray
+                \    qsortBy cmp_u8_rev exampleArray
+                \    puts exampleArray
+                \    ret 0

@@ -9,7 +9,13 @@ $doctype 5
         <meta name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
         <link rel="stylesheet" href="reveal.js/css/reveal.css">
-        <style type="text/css">code{white-space: pre;}</style>
+        <style type="text/css">
+            table.simple tr td {
+                border: 0;
+            }
+            table.simple tr td pre {
+                margin: 0;
+            }
         <link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
@@ -44,7 +50,7 @@ $doctype 5
                     { src: 'reveal.js/plugin/highlight/highlight.js',
                       async: true,
                       callback: function() {
-                        hljs.configure({languages: ['haskell']});
+                        hljs.configure({languages: ['c', 'haskell']});
                         hljs.initHighlightingOnLoad();
                       } },
                     { src: 'reveal.js/plugin/notes/notes.js', async: true },

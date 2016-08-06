@@ -17,9 +17,7 @@ import           Ivory.Language.Type
 type Size = Uint64  -- C size_t
 type IInt = Sint32  -- C int
 type AString n = 'Array n ('Stored Uint8)
-type CompareProcSig s a = '[ConstRef s ('Stored a), ConstRef s ('Stored a)] ':-> IInt
-type CompareProc    s a = Def (CompareProcSig s a)
--- type CompareProcPtr s a = Pro
+type CompareProc s a = Def ('[ConstRef s ('Stored a), ConstRef s ('Stored a)] ':-> IInt)
 
 _puts :: Def ('[Ptr s ('Stored IChar)] ':-> ())
 _puts = importProc "puts" "stdio.h"
@@ -27,17 +25,16 @@ _puts = importProc "puts" "stdio.h"
 puts :: KnownNat n => Ref s (AString n) -> Ivory eff ()
 puts array = call_ _puts (ivoryCast array)
 
-type QsortType s = Def  ('[ Ptr s ('Stored ())  -- pointer to array
-                          , Size                -- number of elements
-                          , Size                -- size of an element
-                          , Ptr s ('Stored ())  -- compare procedure
-                          ]
-                        ':-> ())
-_qsort  :: QsortType s
+_qsort :: Def ('[ Ptr s ('Stored ())  -- pointer to array
+                , Size                -- number of elements
+                , Size                -- size of an element
+                , Ptr s ('Stored ())  -- compare procedure
+                ]
+              ':-> ())
 _qsort = importProc "qsort" "stdlib.h"
 
 qsortBy ::  forall s n a eff
-        .   (KnownNat n, IvoryArea ('Stored a), IvoryType a)
+        .   (KnownNat n, IvoryType a)
         =>  CompareProc s a -> Ref s ('Array n ('Stored a)) -> Ivory eff ()
 qsortBy compareProc array =
     call_ _qsort
@@ -56,9 +53,9 @@ cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
     y <- deref py
     ret $ safeCast x - safeCast y
 
-cmain :: Def ('[] ':-> Sint32)
+cmain :: Def ('[] ':-> IInt)
 cmain = proc "main" $ body $ do
-    let exampleData = "CoLaboratory:ruHaskell 2016"
+    let exampleData = "CoLaboratory: ruHaskell 2016"
     exampleArray <- local
         (iarray $ map (ival . fromIntegral . ord) exampleData :: Init (AString 32))
     puts exampleArray
