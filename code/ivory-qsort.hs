@@ -17,7 +17,7 @@ import           Ivory.Language.Type
 type Size = Uint64  -- C size_t
 type IInt = Sint32  -- C int
 type AString n = 'Array n ('Stored Uint8)
-type CompareProc s a = Def ('[ConstRef s ('Stored a), ConstRef s ('Stored a)] ':-> IInt)
+type CompareProc s area = Def ('[ConstRef s area, ConstRef s area] ':-> IInt)
 
 _puts :: Def ('[Ptr s ('Stored IChar)] ':-> ())
 _puts = importProc "puts" "stdio.h"
@@ -33,21 +33,21 @@ _qsort :: Def ('[ Ptr s ('Stored ())  -- pointer to array
               ':-> ())
 _qsort = importProc "qsort" "stdlib.h"
 
-qsortBy ::  forall s n a eff
-        .   (KnownNat n, IvoryType a)
-        =>  CompareProc s a -> Ref s ('Array n ('Stored a)) -> Ivory eff ()
+qsortBy ::  forall s n area eff
+        .   (KnownNat n, IvoryArea area, IvorySizeOf area)
+        =>  CompareProc s area -> Ref s ('Array n area) -> Ivory eff ()
 qsortBy compareProc array =
     call_ _qsort
           (ivoryCast array)
           (fromInteger $ natVal (Proxy :: Proxy n))
-          (sizeOf (Proxy :: Proxy ('Stored a)))
+          (sizeOf (Proxy :: Proxy area))
           (ivoryCast' (procPtr compareProc))
 
 ivoryCast' :: forall a b . (IvoryVar a, IvoryExpr b) => a -> b
 ivoryCast' x = wrapExpr (ExpSafeCast ty (unwrapExpr x))
   where ty = ivoryType (Proxy :: Proxy a)
 
-cmp_u8_rev :: CompareProc s Uint8
+cmp_u8_rev :: CompareProc s ('Stored Uint8)
 cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
     x <- deref px
     y <- deref py

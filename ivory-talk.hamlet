@@ -207,9 +207,6 @@ $newline text
                             \    size_t width,
                             \    int (* compar)(const void *, const void *)
                             \);
-    <section>
-        <h4> Пример: безопасный вызов <code>qsort</code>
-        <table .simple>
             <tr>
                 <td>
                     импорт <nobr>в Ivory</nobr>
@@ -222,24 +219,26 @@ $newline text
                             \                , Ptr s (Stored ()) ]
                             \              :-> ())
                             \_qsort = importProc "qsort" "stdlib.h"
+    <section>
+        <table .simple>
             <tr>
                 <td>
                     безопасный интерфейс
                 <td width="100%">
                     <pre>
                         <code>
-                            \type CompareProc s a =
-                            \    Def ('[ ConstRef s (Stored a)
-                            \          , ConstRef s (Stored a) ]
+                            \type CompareProc s area =
+                            \    Def ('[ ConstRef s area
+                            \          , ConstRef s area ]
                             \        :-> IInt)
-                            \qsortBy :: CompareProc s a
-                            \        -> Ref s (Array n (Stored a))
+                            \qsortBy :: CompareProc s area
+                            \        -> Ref s (Array n area)
                             \        -> Ivory eff ()
     <section>
         <h4> Использование
         <pre>
             <code>
-                \cmp_u8_rev :: CompareProc s Uint8
+                \cmp_u8_rev :: CompareProc s (Stored Uint8)
                 \cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
                 \    x &lt;- deref px
                 \    y &lt;- deref py
