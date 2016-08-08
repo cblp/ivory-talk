@@ -231,6 +231,7 @@ $newline text
                             \    Def ('[ ConstRef s area
                             \          , ConstRef s area ]
                             \        :-> IInt)
+                            \
                             \qsortBy :: CompareProc s area
                             \        -> Ref s (Array n area)
                             \        -> Ivory eff ()
@@ -254,3 +255,20 @@ $newline text
                 \    qsortBy cmp_u8_rev exampleArray
                 \    puts exampleArray
                 \    ret 0
+    <section>
+        <h4> Реализация
+        <pre>
+            <code>
+                \type CompareProc s area =
+                \    Def ('[ConstRef s area, ConstRef s area] :-> IInt)
+                \
+                \qsortBy ::
+                \    forall s n area eff .
+                \    (KnownNat n, IvoryArea area, IvorySizeOf area) =>
+                \    CompareProc s area -> Ref s (Array n area) -> Ivory eff ()
+                \qsortBy compareProc array =
+                \    call_ _qsort
+                \        (ivoryCast array)
+                \        (fromInteger $ natVal (Proxy :: Proxy n))
+                \        (sizeOf (Proxy :: Proxy area))
+                \        (ivoryCast' (procPtr compareProc))
