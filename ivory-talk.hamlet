@@ -324,3 +324,8 @@ $newline text
     <ol>
         <li> Haskell облегчает написание и генерацию кода на C.
         <li> И language-c-quote, и Ivory хороши. Каждый со своими ограничениями.
+
+<section>
+    <p> Юрий Сыровецкий, разработчик, Лаборатория Касперского
+    <p> <a href="https://twitter.com/cblp_su">twitter.com/cblp_su</a>
+    <p> <a href="https://github.com/cblp/ivory-talk/tree/master/code">github.com/cblp/ivory-talk</a>
