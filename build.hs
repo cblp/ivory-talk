@@ -27,8 +27,18 @@ main = shakeArgs shakeOptions $ do
     "code/.tested" %> \out -> do
         let examplesDir = "code"
         codeExamples <- getDirectoryFiles examplesDir ["*.hs"]
-        need [examplesDir </> file -<.> "exe" | file <- codeExamples]
+        need [examplesDir </> file -<.> "tested" | file <- codeExamples]
         writeFile' out ""
+
+    "code/*.tested" %> \testedFile -> do
+        let exeFile = testedFile -<.> "exe"
+            expectFile = testedFile -<.> "expect"
+        need [exeFile, expectFile]
+        Stdout out <- command [] exeFile []
+        expect <- readFile' expectFile
+        when (out /= expect) $
+            fail "Can't satisfy expectation"
+        writeFile' testedFile ""
 
     "code/*.exe" %> \exeFile -> do
         let cFile = exeFile -<.> "c"

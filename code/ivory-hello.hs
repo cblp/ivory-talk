@@ -4,7 +4,6 @@
 import           Data.String
 import qualified Ivory.Compile.C.CmdlineFrontend as C
 import           Ivory.Language
-import           System.Environment
 
 puts :: Def ('[IString] ':-> ())
 puts = importProc "puts" "stdio.h"
@@ -21,5 +20,5 @@ hello msg = package "ivory-hello" $ do
 
 main :: IO ()
 main = do
-    msg:rest <- getArgs
-    withArgs rest $ C.compile [hello msg] []
+    let msg = "CoLaboratory: ruHaskell 2016"
+    C.compile [hello msg] []

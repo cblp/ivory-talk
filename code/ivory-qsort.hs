@@ -51,11 +51,11 @@ cmp_u8_rev :: CompareProc s ('Stored Uint8)
 cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
     x <- deref px
     y <- deref py
-    ret $ safeCast x - safeCast y
+    ret $ safeCast y - safeCast x
 
 cmain :: Def ('[] ':-> IInt)
 cmain = proc "main" $ body $ do
-    let exampleData = "CoLaboratory: ruHaskell 2016"
+    let exampleData = "CoLaboratory: ruHaskell 2016\0"
     exampleArray <- local
         (iarray $ map (ival . fromIntegral . ord) exampleData :: Init (AString 32))
     puts exampleArray

@@ -3,5 +3,5 @@
 /code/*.c
 /code/*.exe
 /code/*.h
-/code/.tested
+/code/*.tested
 /ivory-talk.html

@@ -1,13 +1,12 @@
 {-# LANGUAGE QuasiQuotes #-}
 
 import           Language.C.Quote.C
-import           System.Environment
 import           Text.PrettyPrint.Mainland
 -- import           Text.Show.Pretty
 
 main :: IO ()
 main = do
-    msg:_ <- getArgs
+    let msg = "CoLaboratory: ruHaskell 2016"
     let code = [cunit|
         $esc:("#include <stdio.h>")
         int main() {
