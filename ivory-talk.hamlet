@@ -84,7 +84,7 @@ $newline text
                 \                  "CoLaboratory: ruHaskell 2016" ) ] ) ) ) ] ) ]
 
 <section>
-    <h3> <code>language-c-quote</code>: плюсы
+    <h3> <code>language-c-quote</code>: достоинства
     <ul>
         <li> QuasiQuotes — можно писать почти как на C,
             \ код может править С-программист, не знающий Haskell
@@ -272,3 +272,47 @@ $newline text
                 \        (fromInteger $ natVal (Proxy :: Proxy n))
                 \        (sizeOf (Proxy :: Proxy area))
                 \        (ivoryCast' (procPtr compareProc))
+
+<section>
+    <h3> Ivory: достоинства
+    <ul>
+        <li> корректность кода на входе гарантируется системой типов Haskell
+        <li> корректность кода на выходе гарантируется библиотекой #
+            <code>language-c-quote</code>
+        <li> предусмотрены способы защиты от многих UB и UB
+        <li> исправлена слабая типизация языка C
+        <li> вместо «костыля» <nobr>CPP —</nobr> хорошо типизированные #
+            полиморфные макросы на Haskell
+            <ul>
+                <li> имитация полиморфизма в C
+
+<section>
+    <h3> Ivory: больше достоинств
+    <ul>
+        <li> генерация poperty тестов QuickCheck
+        <li> аналитическая проверка свойств (model checking)
+            <ul>
+                <li> исходного кода на Ivory с помощью SMT-решателя CVC4
+                <li> результирующего кода на C с помощью CBMC
+
+<section>
+    <h3> Ivory: недостатки фундаметальные
+    <ul>
+        <li> мало документации
+        <li> Ivory /= <nobr>Haskell —</nobr> <nobr>не все</nobr> #
+            возможности Haskell можно транслировать <nobr>в C</nobr>
+        <li> Ivory /= <nobr>C —</nobr> <nobr>не все</nobr> #
+            возможности языка C покрываются языком Ivory
+        <li> программист должен хорошо разбираться и в C, #
+            и в Haskell на уровне типов
+
+<section>
+    <h3> Ivory: недостатки практические
+    <ul>
+        <li> константы <nobr>для C</nobr> должны быть известны #
+            <nobr>на этапе</nobr> компиляции <nobr>Haskell —</nobr> #
+            приходится добавлять ещё один уровень кодогенерации #
+            (Template Haskell)
+        <li> неудобства <nobr>при работе</nobr> <nobr>с типами</nobr>, #
+            структурами <nobr>и процедурами</nobr>, #
+            определёнными <nobr>в C</nobr>
