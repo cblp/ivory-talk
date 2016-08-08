@@ -243,7 +243,7 @@ $newline text
                 \cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
                 \    x &lt;- deref px
                 \    y &lt;- deref py
-                \    ret $ safeCast x - safeCast y
+                \    ret $ safeCast y - safeCast x
                 \
                 \cmain :: Def ('[] ':-> IInt)
                 \cmain = proc "main" $ body $ do
