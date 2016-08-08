@@ -327,5 +327,9 @@ $newline text
 
 <section>
     <p> Юрий Сыровецкий, разработчик, Лаборатория Касперского
-    <p> <a href="https://twitter.com/cblp_su">twitter.com/cblp_su</a>
-    <p> <a href="https://github.com/cblp/ivory-talk/tree/master/code">github.com/cblp/ivory-talk</a>
+    <p>
+        <a href="https://twitter.com/cblp_su">
+            <code>twitter.com/cblp_su
+    <p>
+        <a href="https://github.com/cblp/ivory-talk/tree/master/code">
+            <code>github.com/cblp/ivory-talk
