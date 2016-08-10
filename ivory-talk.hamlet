@@ -206,15 +206,16 @@ $newline text
                 \     => Def ('[ConstRef s ('Array n ('Stored Uint32))] ':-> Uint32)
                 \csum = proc "sum" $ \xs -> body $ do
                 \    s &lt;- local izero
-                \    arrayMap $ \i ->
-                \        store s =&lt;&lt; liftA2 (+) (deref s) (deref $ xs ! i)
+                \    arrayMap $ \i -> do
+                \        s &lt;- deref r
+                \        x &lt;- deref $ xs ! i
+                \        store r $ s + x
                 \    ret =&lt;&lt; deref s
                 \
                 \cmain = proc "main" $ body $ do
-                \    exampleArray &lt;- constRef &lt;$>
-                \        local
-                \            (iarray $ map ival [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
-                \            :: Init ('Array 10 ('Stored Uint32)))
+                \    exampleArray &lt;- constRef &lt;$> local
+                \        (iarray $ map ival [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+                \        :: Init ('Array 10 ('Stored Uint32)))
                 \    s &lt;- call csum exampleArray
                 \    call_ printf "%u\n" s
                 \    ret 0
@@ -229,10 +230,12 @@ $newline text
                 \            ':-> Uint32)
                 \csum = proc "sum" $ \xs -> body $ do
                 \    s &lt;- local izero
-                \    arrayMap $ \i ->
+                \    arrayMap $ \i -> do
+                \        s &lt;- deref r
                 \        -- i :: Ix n -- диапазон 'i' ограничен размером массива
                 \        -- не произойдёт выход за границы массива
-                \        store s =&lt;&lt; liftA2 (+) (deref s) (deref $ xs ! i)
+                \        x &lt;- deref $ xs ! i
+                \        store r $ s + x
                 \    ret =&lt;&lt; deref s
 
 <!--гарантия тотальности из эффектов-->

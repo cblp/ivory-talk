@@ -4,7 +4,6 @@
 
 module Main (main) where
 
-import           Control.Applicative             (liftA2)
 import           GHC.TypeLits
 import qualified Ivory.Compile.C.CmdlineFrontend as C
 import           Ivory.Language
@@ -16,10 +15,12 @@ printf = importProc "printf" "stdio.h"
 
 csum :: KnownNat n => Def ('[ConstRef s ('Array n ('Stored Uint32))] ':-> Uint32)
 csum = proc "sum" $ \xs -> body $ do
-    s <- local izero
-    arrayMap $ \i ->
-        store s =<< liftA2 (+) (deref s) (deref $ xs ! i)
-    ret =<< deref s
+    r <- local izero
+    arrayMap $ \i -> do
+        s <- deref r
+        x <- deref $ xs ! i
+        store r $ s + x
+    ret =<< deref r
 
 cmain :: Def ('[] ':-> IInt)
 cmain = proc "main" $ body $ do
