@@ -1,4 +1,3 @@
-{-# OPTIONS -fno-warn-orphans #-}
 {-# LANGUAGE DataKinds           #-}
 {-# LANGUAGE FlexibleContexts    #-}
 {-# LANGUAGE ScopedTypeVariables #-}

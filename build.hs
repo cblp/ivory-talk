@@ -44,7 +44,10 @@ main = shakeArgs shakeOptions $ do
         let cFile = exeFile -<.> "c"
         need [cFile]
         command_ [Traced $ "gcc " ++ cFile]
-            "gcc" ["-Wall", "-Wextra", "-Werror", "-o", exeFile, cFile]
+            "gcc" [ "-Wall", "-Wextra", "-Werror", "-Wno-error=unused-variable"
+                  , "-o", exeFile
+                  , cFile
+                  ]
 
     "code/*.c" %> \cFile -> do
         let hsFile = cFile -<.> "hs"
