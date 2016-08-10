@@ -16,6 +16,12 @@ $doctype 5
             table.simple tr td pre {
                 margin: 0;
             }
+            .reveal .code {
+                font-family: monospace;
+            }
+            .light {
+                opacity: 0.5;
+            }
         <link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
