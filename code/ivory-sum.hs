@@ -6,6 +6,7 @@
 
 module Main (main) where
 
+import           Control.Applicative             (liftA2)
 import           GHC.TypeLits
 import qualified Ivory.Compile.C.CmdlineFrontend as C
 import           Ivory.Language
@@ -15,14 +16,15 @@ type IInt = Sint32  -- C int
 printf :: Def ('[IString, Uint32] ':-> ())
 printf = importProc "printf" "stdio.h"
 
+(+=) :: (IvoryStore a, Num a) => Ref s1 ('Stored a) -> Ref s2 ('Stored a) -> Ivory eff ()
+r += x = store r =<< liftA2 (+) (deref r) (deref x)
+
 csum :: (KnownNat n, IvoryStore a, IvoryZeroVal a, Num a)
-     => Def ('[Ref s ('Array n ('Stored a))] ':-> a)
+     => Def ('[{-TODO Const-}Ref s ('Array n ('Stored a))] ':-> a)
 csum = proc "sum" $ \xs -> body $ do
     acc <- local izero
-    arrayMap $ \i -> do
-        s <- deref acc
-        x <- deref $ xs ! i
-        store acc $ s + x
+    arrayMap $ \i ->
+        acc += (xs ! i)
     ret =<< deref acc
 
 cmain :: Def ('[] ':-> IInt)
