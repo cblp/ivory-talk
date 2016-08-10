@@ -1,8 +1,6 @@
-{-# LANGUAGE DataKinds           #-}
-{-# LANGUAGE FlexibleContexts    #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeOperators       #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeOperators     #-}
 
 module Main (main) where
 
@@ -16,16 +14,12 @@ type IInt = Sint32  -- C int
 printf :: Def ('[IString, Uint32] ':-> ())
 printf = importProc "printf" "stdio.h"
 
-(+=) :: (IvoryStore a, Num a) => Ref s1 ('Stored a) -> ConstRef s2 ('Stored a) -> Ivory eff ()
-r += x = store r =<< liftA2 (+) (deref r) (deref x)
-
-csum :: (KnownNat n, IvoryStore a, IvoryZeroVal a, Num a)
-     => Def ('[ConstRef s ('Array n ('Stored a))] ':-> a)
+csum :: KnownNat n => Def ('[ConstRef s ('Array n ('Stored Uint32))] ':-> Uint32)
 csum = proc "sum" $ \xs -> body $ do
-    acc <- local izero
+    s <- local izero
     arrayMap $ \i ->
-        acc += (xs ! i)
-    ret =<< deref acc
+        store s =<< liftA2 (+) (deref s) (deref $ xs ! i)
+    ret =<< deref s
 
 cmain :: Def ('[] ':-> IInt)
 cmain = proc "main" $ body $ do

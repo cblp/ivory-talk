@@ -181,20 +181,61 @@ $newline text
                 \  cprint s = call_ puts s
                 \
                 \cmain = proc "main" $ body $ do
-                \  cprint (2016 :: Uint32)
                 \  cprint ("CoLaboratory: ruHaskell" :: IString)
+                \  cprint (2016 :: Uint32)
                 \  ret 0
     <section>
         <h3> Сгенерированный код
         <pre>
             <code>
                 \int32_t main(void) {
-                \    printf("%u\n", (uint32_t) 2016U);
                 \    puts("CoLaboratory: ruHaskell");
+                \    printf("%u\n", (uint32_t) 2016U);
                 \    return (int32_t) 0;
                 \}
 
-<!--пример с суммой, показывающий информацию из сигнатуры-->
+<section>
+    <section>
+        <h3> Ivory: гарантии безопасности
+
+    <section>
+        <h4> Пример: безопасная сумма элементов массива
+        <pre>
+            <code>
+                \csum :: KnownNat n
+                \     => Def ('[ConstRef s ('Array n ('Stored Uint32))] ':-> Uint32)
+                \csum = proc "sum" $ \xs -> body $ do
+                \    s &lt;- local izero
+                \    arrayMap $ \i ->
+                \        store s =&lt;&lt; liftA2 (+) (deref s) (deref $ xs ! i)
+                \    ret =&lt;&lt; deref s
+                \
+                \cmain = proc "main" $ body $ do
+                \    exampleArray &lt;- constRef &lt;$>
+                \        local
+                \            (iarray $ map ival [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+                \            :: Init ('Array 10 ('Stored Uint32)))
+                \    s &lt;- call csum exampleArray
+                \    call_ printf "%u\n" s
+                \    ret 0
+
+    <section>
+        <pre>
+            <code>
+                \csum :: KnownNat n
+                \     => Def ('[ ConstRef -- данные не изменяются
+                \                  s
+                \                  ('Array n ('Stored Uint32)) ]
+                \            ':-> Uint32)
+                \csum = proc "sum" $ \xs -> body $ do
+                \    s &lt;- local izero
+                \    arrayMap $ \i ->
+                \        -- i :: Ix n -- диапазон 'i' ограничен размером массива
+                \        -- не произойдёт выход за границы массива
+                \        store s =&lt;&lt; liftA2 (+) (deref s) (deref $ xs ! i)
+                \    ret =&lt;&lt; deref s
+
+<!--гарантия тотальности из эффектов-->
 
 <section>
     <section>
@@ -281,8 +322,6 @@ $newline text
                 \        (fromInteger $ natVal (Proxy :: Proxy n))
                 \        (sizeOf (Proxy :: Proxy area))
                 \        (ivoryCast' (procPtr compareProc))
-
-<!--гарантия тотальности из эффектов-->
 
 <section>
     <h3> Ivory: достоинства
