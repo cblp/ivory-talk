@@ -51,9 +51,7 @@ main = shakeArgs shakeOptions $ do
         need [hsFile]
         Stdout cCode <-
             command [Traced $ "runhaskell " ++ hsFile]
-                "runhaskell"  [ "-Wall", "-Werror"
-                              , hsFile, "--src-dir=code"
-                              ]
+                "runhaskell" ["-Wall", "-Werror", hsFile, "--src-dir=code"]
         when ("languagec-" `isPrefixOf` takeFileName cFile) $
             writeFile' cFile cCode
 
