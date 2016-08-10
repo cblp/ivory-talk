@@ -336,33 +336,34 @@ $newline text
 
 <section>
     <h3> Ivory: альтернативы
-    <dl .code>
-        <dt> Atom
-        <dd>
-            <a href="http://hackage.haskell.org/package/atom">hackage.haskell.org/package/atom
-
-        <dt> Copilot
-        <dd>
-            <a href="http://hackage.haskell.org/package/copilot">hackage.haskell.org/package/copilot
-        <dd>
-            <a href="http://leepike.github.io/Copilot/">leepike.github.io/Copilot
-
-        <dt> Filet-o-Fish
-        <dd>
-            <a href="https://www.microsoft.com/en-us/research/publication/filet-o-fish-practical-and-dependable-domain-specific-languages-for-os-development/">
-                microsoft.com/en-us/research/publication/filet-o-fish-practical-and-dependable-domain-specific-languages-for-os-development
-
-        <!--<dt> impure-->
-
-        <dt> SBV
-        <dd>
-            <a href="http://hackage.haskell.org/package/sbv">hackage.haskell.org/package/sbv
-        <dd>
-            <a href="http://leventerkok.github.io/sbv/">leventerkok.github.io/sbv
-
-        <dt> Tower
-        <dd>
-            <a href="http://ivorylang.org/tower-overview.html">ivorylang.org/tower-overview.html
+    <table .code .simple>
+        <tr>
+            <td> Atom
+            <td>
+                <a href="http://hackage.haskell.org/package/atom">hackage.haskell.org/package/atom
+        <tr>
+            <td> Copilot
+            <td>
+                <a href="http://hackage.haskell.org/package/copilot">hackage.haskell.org/package/copilot
+                <br>
+                <a href="http://leepike.github.io/Copilot/">leepike.github.io/Copilot
+        <tr>
+            <td> Filet-o-Fish
+            <td>
+                <a href="https://www.microsoft.com/en-us/research/publication/filet-o-fish-practical-and-dependable-domain-specific-languages-for-os-development/">
+                    microsoft.com/<wbr>en-us/<wbr>research/<wbr>publication/<wbr>filet-o-fish-practical-and-dependable-domain-specific-languages-for-os-development
+        <!--<tr>
+            <td> impure-->
+        <tr>
+            <td> SBV
+            <td>
+                <a href="http://hackage.haskell.org/package/sbv">hackage.haskell.org/package/sbv
+                <br>
+                <a href="http://leventerkok.github.io/sbv/">leventerkok.github.io/sbv
+        <tr>
+            <td> Tower
+            <td>
+                <a href="http://ivorylang.org/tower-overview.html">ivorylang.org/tower-overview.html
 
 <section>
     <h3> Выводы
