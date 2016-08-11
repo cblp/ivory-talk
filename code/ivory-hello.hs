@@ -5,7 +5,7 @@ import           Data.String
 import qualified Ivory.Compile.C.CmdlineFrontend as C
 import           Ivory.Language
 
-puts :: Def ('[IString] ':-> ())
+puts :: Def ('[IString] ':-> Sint32)
 puts = importProc "puts" "stdio.h"
 
 cmain :: String -> Def ('[] ':-> Sint32)

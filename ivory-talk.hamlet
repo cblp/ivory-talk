@@ -66,6 +66,7 @@ $newline text
                 \        $esc:("#include &lt;stdio.h>")
                 \        int main() {
                 \            puts($string:msg);
+                \            return 0;
                 \        }
                 \    |]
     <section>
@@ -125,10 +126,10 @@ $newline text
         <h3> Ivory: хеллоуворлд
         <pre>
             <code>
-                \puts :: Def ('[IString] ':-> ())
+                \puts :: Def ('[IString] ':-> IInt)
                 \puts = importProc "puts" "stdio.h"
                 \
-                \cmain :: String -> Def ('[] ':-> Sint32)
+                \cmain :: String -> Def ('[] ':-> IInt)
                 \cmain msg = proc "main" $ body $ do
                 \    call_ puts (fromString msg)
                 \    ret 0
@@ -344,7 +345,7 @@ $newline text
     <ul>
         <li> <nobr><code>ivory-formal-model</code> —</nobr> #
             доказательство корректности программ <nobr>на языке</nobr> Ivory
-        <li> генерация poperty тестов QuickCheck
+        <li> генерация property тестов QuickCheck
             <!--пример?-->
             <ul>
                 <li> можно сгенерировать тесты даже для функций, написанных <nobr>на C</nobr>

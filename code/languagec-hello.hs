@@ -11,6 +11,7 @@ main = do
         $esc:("#include <stdio.h>")
         int main() {
             puts($string:msg);
+            return 0;
         }
     |]
     putDoc $ ppr code
