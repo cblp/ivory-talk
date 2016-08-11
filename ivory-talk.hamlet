@@ -84,7 +84,9 @@ $newline text
                 \       [ BlockStm (Exp
                 \           (Just (FnCall (Var (Id "puts"))
                 \              [ Const ( StringConst
-                \                  "CoLaboratory: ruHaskell 2016" ) ] ) ) ) ] ) ]
+                \                  "CoLaboratory: ruHaskell 2016")])))
+                \       , BlockStm (Return
+                \           (Just (Const (IntConst "0" Signed 0))))])]
 
 <section>
     <h3> <code>language-c-quote</code>: достоинства
