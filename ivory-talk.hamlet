@@ -342,6 +342,8 @@ $newline text
 <section>
     <h3> Ivory: больше достоинств
     <ul>
+        <li> <nobr><code>ivory-formal-model</code> —</nobr> #
+            доказательство корректности программ <nobr>на языке</nobr> Ivory
         <li> генерация poperty тестов QuickCheck
             <!--пример?-->
             <ul>
@@ -351,8 +353,8 @@ $newline text
                 <li> исходного кода на Ivory с помощью SMT-решателя CVC4
                 <li> результирующего кода на C с помощью CBMC
         <li> <code>Expr</code> как <nobr>символьный тип данных —</nobr> #
-            кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода
-        <li> <code>Ivory.Language.Syntax.Concrete.QQ</code>
+            кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода (estimator)
+        <li> <code>Ivory.Language.Syntax.Concrete.QQ</code> — внешний DSL
 
 <section>
     <h3> Ivory: недостатки фундаметальные
