@@ -352,6 +352,7 @@ $newline text
                 <li> результирующего кода на C с помощью CBMC
         <li> <code>Expr</code> как <nobr>символьный тип данных —</nobr> #
             кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода
+        <li> <code>Ivory.Language.Syntax.Concrete.QQ</code>
 
 <section>
     <h3> Ivory: недостатки фундаметальные
