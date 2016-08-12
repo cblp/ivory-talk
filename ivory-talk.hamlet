@@ -56,37 +56,47 @@ $newline text
     <h2> Способ 1. <br> Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
 
 <section>
-    <section>
-        <h3> <code>language-c-quote</code>: хеллоуворлд
-        <pre>
-            <code>
-                \main = do
-                \    msg:_ &lt;- getArgs
-                \    putDoc $ ppr [cunit|
-                \        $esc:("#include &lt;stdio.h>")
-                \        int main() {
-                \            puts($string:msg);
-                \            return 0;
-                \        }
-                \    |]
-    <section>
-        <h3> Получившееся AST
-        <pre>
-            <code>
-                \[ EscDef "#include &lt;stdio.h>"
-                \, FuncDef
-                \    (OldFunc
-                \       (DeclSpec [] [] (Tint Nothing))
-                \       (Id "main")
-                \       (DeclRoot)
-                \       []
-                \       Nothing
-                \       [ BlockStm (Exp
-                \           (Just (FnCall (Var (Id "puts"))
-                \              [ Const ( StringConst
-                \                  "CoLaboratory: ruHaskell 2016")])))
-                \       , BlockStm (Return
-                \           (Just (Const (IntConst "0" Signed 0))))])]
+    <h3> <code>language-c-quote</code>: хеллоуворлд
+    <pre>
+        <code>
+            \main = do
+            \    msg:_ &lt;- getArgs
+            \    putDoc $ ppr [cunit|
+            \        $esc:("#include &lt;stdio.h>")
+            \        int main() {
+            \            puts($string:msg);
+            \            return 0;
+            \        }
+            \    |]
+
+<section>
+    <h3> <code>language-c-quote</code>: AST хеллоуворлда
+    <pre>
+        <code>
+            \[ EscDef "#include &lt;stdio.h>"
+            \, FuncDef
+            \    (OldFunc
+            \       (DeclSpec [] [] (Tint Nothing))
+            \       (Id "main")
+            \       (DeclRoot)
+            \       []
+            \       Nothing
+            \       [ BlockStm (Exp
+            \           (Just (FnCall (Var (Id "puts"))
+            \              [ Const ( StringConst
+            \                  "CoLaboratory: ruHaskell 2016")])))
+            \       , BlockStm (Return
+            \           (Just (Const (IntConst "0" Signed 0))))])]
+
+<section>
+    <h3> <code>language-c-quote</code>: сгенерированный код хеллоуворлда
+    <pre>
+        <code>
+            \#include &lt;stdio.h>
+            \int main() {
+            \    puts("CoLaboratory: ruHaskell 2016");
+            \    return 0;
+            \}
 
 <section>
     <h3> <code>language-c-quote</code>: достоинства
@@ -124,42 +134,42 @@ $newline text
             <nobr>но и в другие</nobr> представления (например, для автоматических доказательств)
 
 <section>
-    <section>
-        <h3> Ivory: хеллоуворлд
-        <pre>
-            <code>
-                \puts :: Def ('[IString] ':-> IInt)
-                \puts = importProc "puts" "stdio.h"
-                \
-                \cmain :: String -> Def ('[] ':-> IInt)
-                \cmain msg = proc "main" $ body $ do
-                \    call_ puts (fromString msg)
-                \    ret 0
-                \
-                \hello msg = package "ivory-hello" $ do
-                \    incl puts
-                \    incl (cmain msg)
-                \
-                \main = do
-                \    msg:rest &lt;- getArgs
-                \    withArgs rest $ C.compile [hello msg] []
-    <section>
-        <h3> Сгенерированный код
-        <code>ivory-hello.h
-        <pre>
-            <code>
-                \#include &lt;stdio.h>
-                \#include "ivory.h"
-                \int32_t main(void);
-        <code>ivory-hello.c
-        <pre>
-            <code>
-                \#include "ivory-hello.h"
-                \
-                \int32_t main(void) {
-                \    puts("CoLaboratory: ruHaskell 2016");
-                \    return (int32_t) 0;
-                \}
+    <h3> Ivory: хеллоуворлд
+    <pre>
+        <code>
+            \puts :: Def ('[IString] ':-> IInt)
+            \puts = importProc "puts" "stdio.h"
+            \
+            \cmain :: String -> Def ('[] ':-> IInt)
+            \cmain msg = proc "main" $ body $ do
+            \    call_ puts (fromString msg)
+            \    ret 0
+            \
+            \hello msg = package "ivory-hello" $ do
+            \    incl puts
+            \    incl (cmain msg)
+            \
+            \main = do
+            \    msg:rest &lt;- getArgs
+            \    withArgs rest $ C.compile [hello msg] []
+
+<section>
+    <h3> Ivory: сгенерированный код хеллоуворлда
+    <code>ivory-hello.h
+    <pre>
+        <code>
+            \#include &lt;stdio.h>
+            \#include "ivory.h"
+            \int32_t main(void);
+    <code>ivory-hello.c
+    <pre>
+        <code>
+            \#include "ivory-hello.h"
+            \
+            \int32_t main(void) {
+            \    puts("CoLaboratory: ruHaskell 2016");
+            \    return (int32_t) 0;
+            \}
 
 <section>
     <h3> Ivory: особенности
