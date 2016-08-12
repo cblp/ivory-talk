@@ -135,11 +135,12 @@ $newline text
 
 <section>
     <h3> Ivory: хеллоуворлд
-    <pre>
-        <code>
+    <pre style="box-shadow: none;">
+        <code .fragment>
             \puts :: Def ('[IString] ':-> IInt)
             \puts = importProc "puts" "stdio.h"
             \
+        <code>
             \cmain :: String -> Def ('[] ':-> IInt)
             \cmain msg = proc "main" $ body $ do
             \    call_ puts (fromString msg)
@@ -148,6 +149,7 @@ $newline text
             \hello msg = package "ivory-hello" $ do
             \    incl puts
             \    incl (cmain msg)
+        <code .fragment>
             \
             \main = do
             \    msg:rest &lt;- getArgs
@@ -223,97 +225,88 @@ $newline text
             \    s &lt;- local izero
             \    arrayMap $ \i -> do
             \        s &lt;- deref r
-            \        -- i :: Ix n -- диапазон 'i' ограничен размером массива
+            \        -- i :: Ix n -- значения 'i' ограничены размером массива
             \        -- не произойдёт выход за границы массива
             \        x &lt;- deref (xs ! i)
             \        store r (s + x)
             \    ret =&lt;&lt; deref s
 
 <section>
-    <section>
-        <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов
+    <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов
 
-    <section>
-        <h4> Пример: безопасный вызов <code>qsort</code>
-        <table .simple>
-            <tr>
-                <td>
-                    сигнатура <nobr>в C</nobr>
-                <td width="100%">
-                    <pre>
-                        <code class=c>
-                            \void
-                            \qsort(
-                            \    void * base,
-                            \    size_t nel,
-                            \    size_t width,
-                            \    int (* compar)(const void *, const void *)
-                            \);
-            <tr>
-                <td>
-                    импорт <nobr>в Ivory</nobr>
-                <td width="100%">
-                    <pre>
-                        <code>
-                            \_qsort :: Def ('[ Ptr s (Stored ())
-                            \                , Size
-                            \                , Size
-                            \                , Ptr s (Stored ()) ]
-                            \              :-> ())
-                            \_qsort = importProc "qsort" "stdlib.h"
-    <section>
-        <table .simple>
-            <tr>
-                <td>
-                    безопасный интерфейс
-                <td width="100%">
-                    <pre>
-                        <code>
-                            \type CompareProc s area =
-                            \    Def ('[ ConstRef s area
-                            \          , ConstRef s area ]
-                            \        :-> IInt)
-                            \
-                            \qsortBy :: CompareProc s area
-                            \        -> Ref s (Array n area)
-                            \        -> Ivory eff ()
-    <section>
-        <h4> Использование
-        <pre>
-            <code>
-                \cmp_u8_rev :: CompareProc s (Stored Uint8)
-                \cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
-                \    x &lt;- deref px
-                \    y &lt;- deref py
-                \    ret $ safeCast y - safeCast x
-                \
-                \cmain :: Def ('[] ':-> IInt)
-                \cmain = proc "main" $ body $ do
-                \    let exampleData = "CoLaboratory: ruHaskell 2016"
-                \    exampleArray &lt;- local (iarray $
-                \        map (ival . fromIntegral . ord) exampleData
-                \        :: Init (AString 32))
-                \    puts exampleArray
-                \    qsortBy cmp_u8_rev exampleArray
-                \    puts exampleArray
-                \    ret 0
-    <section>
-        <h4> Реализация
-        <pre>
-            <code>
-                \type CompareProc s area =
-                \    Def ('[ConstRef s area, ConstRef s area] :-> IInt)
-                \
-                \qsortBy ::
-                \    forall s n area eff .
-                \    (KnownNat n, IvoryArea area, IvorySizeOf area) =>
-                \    CompareProc s area -> Ref s (Array n area) -> Ivory eff ()
-                \qsortBy compareProc array =
-                \    call_ _qsort
-                \        (ivoryCast array)
-                \        (fromInteger $ natVal (Proxy :: Proxy n))
-                \        (sizeOf (Proxy :: Proxy area))
-                \        (ivoryCast' (procPtr compareProc))
+<section>
+    <h4> Пример: безопасный вызов <code>qsort</code>
+    <table .simple>
+        <tr>
+            <td>
+                сигнатура <nobr>в C</nobr>
+            <td width="100%">
+                <pre>
+                    <code class=c>
+                        \void
+                        \qsort(
+                        \    void * base,
+                        \    size_t nel,
+                        \    size_t width,
+                        \    int (* compar)(const void *, const void *)
+                        \);
+        <tr>
+            <td>
+                импорт <nobr>в Ivory</nobr>
+            <td width="100%">
+                <pre>
+                    <code>
+                        \_qsort :: Def ('[ Ptr s (Stored ())
+                        \                , Size
+                        \                , Size
+                        \                , Ptr s (Stored ()) ]
+                        \              :-> ())
+                        \_qsort = importProc "qsort" "stdlib.h"
+<section>
+    <h4> <code>qsortBy</code>: безопасный интерфейс
+    <pre>
+        <code>
+            \type CompareProc s area =
+            \    Def ('[ ConstRef s area
+            \          , ConstRef s area ]
+            \        :-> IInt)
+            \
+            \qsortBy :: CompareProc s area
+            \        -> Ref s (Array n area)
+            \        -> Ivory eff ()
+
+<section>
+    <h4> <code>qsortBy</code>: использование
+    <pre>
+        <code>
+            \cmp_u8_rev :: CompareProc s (Stored Uint8)
+            \cmp_u8_rev = proc "cmp_u8_rev" $ \px py -> body $ do
+            \    x &lt;- deref px
+            \    y &lt;- deref py
+            \    ret $ safeCast y - safeCast x
+            \
+            \cmain = proc "main" $ body $ do
+            \    ...
+            \    qsortBy cmp_u8_rev exampleArray
+            \    ...
+
+<section>
+    <h4> <code>qsortBy</code>: реализация
+    <pre>
+        <code>
+            \type CompareProc s area =
+            \    Def ('[ConstRef s area, ConstRef s area] :-> IInt)
+            \
+            \qsortBy ::
+            \    forall s n area eff .
+            \    (KnownNat n, IvoryArea area, IvorySizeOf area) =>
+            \    CompareProc s area -> Ref s (Array n area) -> Ivory eff ()
+            \qsortBy compareProc array =
+            \    call_ _qsort
+            \        (ivoryCast array)
+            \        (fromInteger $ natVal (Proxy :: Proxy n))
+            \        (sizeOf (Proxy :: Proxy area))
+            \        (ivoryCast' (procPtr compareProc))
 
 <section>
     <h3> Ivory: достоинства
