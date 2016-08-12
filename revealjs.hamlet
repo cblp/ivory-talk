@@ -22,7 +22,7 @@ $doctype 5
             .light {
                 opacity: 0.5;
             }
-        <link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
+        <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
         <!-- Printing and PDF exports -->

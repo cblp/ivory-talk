@@ -267,7 +267,7 @@ html:-moz-full-screen-ancestor {
 .reveal .progress {
   position: fixed;
   display: none;
-  height: 3px;
+  height: 1%;
   width: 100%;
   bottom: 0;
   left: 0;
@@ -296,8 +296,8 @@ html:-moz-full-screen-ancestor {
 .reveal .slide-number {
   position: fixed;
   display: block;
-  right: 8px;
-  bottom: 8px;
+  right: 2%;
+  bottom: 1.5%;
   z-index: 31;
   font-family: Helvetica, sans-serif;
   font-size: 12px;
