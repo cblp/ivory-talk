@@ -359,6 +359,21 @@ $newline text
             определёнными <nobr>в C</nobr>
 
 <section>
+    <h3> Ivory: подводные камни
+    <pre>
+        <code .haskell>
+            \do  exampleArray &lt;- local
+            \        (iarray $ map ival [0, 1, 2, 3]
+            \        :: Init (Array 4 (Stored Uint32)))
+            \    x &lt;- deref (exampleArray ! 4)
+            \    call_ printf "%u\n" x
+    <p .fragment> компилируется
+    <p .fragment> не падает
+    <pre .fragment>
+        <code>
+            \0
+
+<section>
     <h3> Ivory: альтернативы
     <table .code .simple>
         <tr>
