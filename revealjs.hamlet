@@ -22,6 +22,13 @@ $doctype 5
             .light {
                 opacity: 0.5;
             }
+            .logo {
+                display: block;
+                position: fixed;
+                left: 1%;
+                bottom: 1%;
+                height: 2em;
+            }
         <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
@@ -42,6 +49,7 @@ $doctype 5
         <div class="reveal">
             <div class="slides">
                 ^{slides}
+            <img .logo src="Kaspersky_RGB_POS_PNG.png">
 
         <script src="reveal.js/lib/js/head.min.js"></script>
         <script src="reveal.js/js/reveal.js"></script>
