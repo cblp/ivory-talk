@@ -133,8 +133,6 @@ $newline text
         <li> можно транслировать <nobr>не только</nobr> <nobr>в текст</nobr> <nobr>на C</nobr>, #
             <nobr>но и в другие</nobr> представления (например, для автоматических доказательств)
 
-<section data-background-image="codegen.blockdiag.svg">
-
 <section>
     <h3> Ivory: хеллоуворлд
     <pre style="box-shadow: none;">
@@ -175,13 +173,7 @@ $newline text
             \    return (int32_t) 0;
             \}
 
-<section>
-    <h3> Ivory: особенности
-    <ul>
-        <li> код пишется <nobr>ни на C</nobr>, <nobr>ни на «настоящем»</nobr> Haskell,
-            \ <nobr>а на «языке</nobr> Ivory»
-        <li> «обычный» Haskell-код выполняется <nobr>во время</nobr> генерации C-кода
-        <li> Ivory-код <nobr>не выполняется</nobr>, <nobr>а транслируется</nobr> <nobr>в C</nobr>
+<section data-background-image="codegen.blockdiag.svg">
 
 <section>
     <h3> Ivory: использование Haskell <nobr>для умных</nobr> макросов
