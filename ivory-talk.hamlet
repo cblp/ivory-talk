@@ -56,7 +56,7 @@ $newline text
     <h2> Способ 1. <br> Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
 
 <section>
-    <h3> <code>language-c-quote</code>: хеллоуворлд
+    <h3> <code>language-c-quote</code>: хеллоуолд
     <pre>
         <code>
             \main = do
@@ -134,7 +134,7 @@ $newline text
             <nobr>но и в другие</nobr> представления (например, для автоматических доказательств)
 
 <section>
-    <h3> Ivory: хеллоуворлд
+    <h3> Ivory: хеллоуолд
     <pre style="box-shadow: none;">
         <code .fragment>
             \puts :: Def ('[IString] ':-> IInt)
@@ -211,19 +211,22 @@ $newline text
     <pre>
         <code>
             \csum :: KnownNat n
-            \     => Def ('[ ConstRef -- данные не изменяются
+            \     => Def ('[ ConstRef -- (1) указатель не null
+            \                -- ^ (2) данные не изменяются
             \                  s
             \                  ('Array n ('Stored Uint32)) ]
+            \                       -- ^ доступно n ячеек памяти
             \            ':-> Uint32)
             \csum = proc "sum" $ \xs -> body $ do
-            \    s &lt;- local izero
+            \    r &lt;- local izero
             \    arrayMap $ \i -> do
             \        s &lt;- deref r
-            \        -- i :: Ix n -- значения 'i' ограничены размером массива
-            \        -- не произойдёт выход за границы массива
             \        x &lt;- deref (xs ! i)
+            \        -- ^ (3) -- i :: Ix n
+            \        -- значения 'i' ограничены размером массива
+            \        -- не произойдёт выход за границы массива
             \        store r (s + x)
-            \    ret =&lt;&lt; deref s
+            \    ret =&lt;&lt; deref r
 
 <section>
     <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов
