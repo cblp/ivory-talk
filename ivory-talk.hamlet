@@ -137,11 +137,11 @@ $newline text
     <h3> Ivory: хеллоуолд
     <pre style="box-shadow: none;">
         <code .fragment>
-            \puts :: Def ('[IString] ':-> IInt)
+            \puts :: Def ('[IString] :-> IInt)
             \puts = importProc "puts" "stdio.h"
             \
         <code>
-            \cmain :: String -> Def ('[] ':-> IInt)
+            \cmain :: String -> Def ('[] :-> IInt)
             \cmain msg = proc "main" $ body $ do
             \    call_ puts (fromString msg)
             \    ret 0
@@ -214,9 +214,9 @@ $newline text
             \     => Def ('[ ConstRef -- (1) указатель не null
             \                -- ^ (2) данные не изменяются
             \                  s
-            \                  ('Array n ('Stored Uint32)) ]
+            \                  (Array n (Stored Uint32)) ]
             \                       -- ^ доступно n ячеек памяти
-            \            ':-> Uint32)
+            \            :-> Uint32)
             \csum = proc "sum" $ \xs -> body $ do
             \    r &lt;- local izero
             \    arrayMap $ \i -> do
@@ -227,6 +227,26 @@ $newline text
             \        -- не произойдёт выход за границы массива
             \        store r (s + x)
             \    ret =&lt;&lt; deref r
+
+<section>
+    <pre>
+        <code>
+            \do  let px = xs ! i
+            \    x &lt;- deref px
+            \    store px $ s + x
+    <pre>
+        <code>
+            \Couldn't match type ‘Ref s0 ('Array n0 ('Stored r0))’
+            \               with ‘ConstRef s ('Array n ('Stored Uint32))’
+            \arising from a functional dependency between:
+            \  constraint ‘Ivory.Language.Proc.IvoryProcDef
+            \                ('[ConstRef s ('Array n ('Stored Uint32))] ':-> Uint32)
+            \                (Ref s0 ('Array n0 ('Stored r0)) -> Body r0)’
+            \    arising from a use of ‘proc’
+            \  instance ‘Ivory.Language.Proc.IvoryProcDef
+            \              ((a : args) ':-> ret) (a -> k)’
+            \    at &lt;no location info>
+            \In the expression: proc "sum"
 
 <section>
     <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов процедур <nobr>на C</nobr>
