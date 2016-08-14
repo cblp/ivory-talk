@@ -70,7 +70,7 @@ $newline text
             \    |]
 
 <section>
-    <h3> <code>language-c-quote</code>: AST хеллоуворлда
+    <h3> <code>language-c-quote</code>: AST хеллоуолда
     <pre>
         <code>
             \[ EscDef "#include &lt;stdio.h>"
@@ -89,7 +89,7 @@ $newline text
             \           (Just (Const (IntConst "0" Signed 0))))])]
 
 <section>
-    <h3> <code>language-c-quote</code>: сгенерированный код хеллоуворлда
+    <h3> <code>language-c-quote</code>: сгенерированный код хеллоуолда
     <pre>
         <code>
             \#include &lt;stdio.h>
@@ -130,21 +130,35 @@ $newline text
     <ul>
         <li> eDSL <nobr>с ограниченными</nobr> <nobr>возможностями —</nobr> #
             это убирает целые классы ошибок
+        <li> ограничения закодированы в типах
+        <li>
+            <span .fragment .strike-out data-fragment-index=1>компилируется => работает
+            <span .fragment .fade-out data-fragment-index=1>?
+        <li .fragment data-fragment-index=1> компилируется => есть гарантии определённых свойств
+
+<section>
+    <h3> Ivory AST
+    <ul>
+        <li> проще и ближе к семантике, чем AST языка C
+        <li> можно переписывать оптимизировать (Ivory уже это делает)
         <li> можно транслировать <nobr>не только</nobr> <nobr>в текст</nobr> <nobr>на C</nobr>, #
             <nobr>но и в другие</nobr> представления (например, для автоматических доказательств)
+        <li> можно инструментировать
+        <li> ...
 
 <section>
     <h3> Ivory: хеллоуолд
     <pre style="box-shadow: none;">
-        <code .fragment>
-            \puts :: Def ('[IString] :-> IInt)
-            \puts = importProc "puts" "stdio.h"
-            \
         <code>
             \cmain :: String -> Def ('[] :-> IInt)
             \cmain msg = proc "main" $ body $ do
             \    call_ puts (fromString msg)
             \    ret 0
+        <code .fragment>
+            \
+            \puts :: Def ('[IString] :-> IInt)
+            \puts = importProc "puts" "stdio.h"
+        <code .fragment .haskell>
             \
             \hello msg = package "ivory-hello" $ do
             \    incl puts
@@ -156,7 +170,7 @@ $newline text
             \    withArgs rest $ C.compile [hello msg] []
 
 <section>
-    <h3> Ivory: сгенерированный код хеллоуворлда
+    <h3> Ivory: сгенерированный код хеллоуолда
     <code>ivory-hello.h
     <pre>
         <code>
@@ -333,7 +347,7 @@ $newline text
         <li> корректность кода на выходе гарантируется библиотекой #
             <code>language-c-quote</code>
         <li> предусмотрены способы защиты от многих UB и UB
-        <li> исправлена слабая типизация языка C
+        <li> исправляются проблемы слабой типизации C
         <li> вместо «костыля» <nobr>CPP —</nobr> хорошо типизированные #
             полиморфные макросы на Haskell
             <ul>

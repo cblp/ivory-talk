@@ -29,6 +29,13 @@ $doctype 5
                 bottom: 1%;
                 height: 2em;
             }
+            .reveal .slides section .fragment.strike-out {
+                opacity: 1;
+                visibility: visible;
+            }
+            .reveal .slides section .fragment.strike-out.visible {
+                text-decoration: line-through;
+            }
         <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
