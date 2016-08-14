@@ -229,7 +229,7 @@ $newline text
             \    ret =&lt;&lt; deref r
 
 <section>
-    <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов
+    <h3> Ivory: использование Haskell <nobr>для контроля</nobr> типов процедур <nobr>на C</nobr>
 
 <section>
     <h4> Пример: безопасный вызов <code>qsort</code>
