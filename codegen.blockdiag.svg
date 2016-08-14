@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg viewBox="0 0 684 530" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="60" x="191" y="156" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="60" x="439" y="156" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="60" x="191" y="346" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="60" x="439" y="346" />
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="60" x="64" y="150" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="43" x="94" y="169">Haskell</text>
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="25" x="94" y="182">code</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="60" x="188" y="150" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="43" x="218" y="176">compile</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="60" x="312" y="150" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="55" x="342" y="176">generator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="60" x="436" y="150" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="19" x="466" y="176">run</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="60" x="64" y="340" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="37" x="94" y="366">C code</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="60" x="188" y="340" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="43" x="218" y="366">compile</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="60" x="312" y="340" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="25" x="342" y="359">user</text>
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="37" x="342" y="372">binary</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="60" x="436" y="340" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="19" x="466" y="366">run</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="60" x="560" y="340" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="37" x="590" y="366">Profit</text>
+  <path d="M 124 170 L 180 170" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="187,170 180,166 180,174 187,170" stroke="rgb(0,0,0)" />
+  <path d="M 248 170 L 304 170" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="311,170 304,166 304,174 311,170" stroke="rgb(0,0,0)" />
+  <path d="M 372 170 L 428 170" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="435,170 428,166 428,174 435,170" stroke="rgb(0,0,0)" />
+  <path d="M 466 190 L 466 265" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 94 265 L 466 265" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 94 265 L 94 332" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="94,339 90,332 98,332 94,339" stroke="rgb(0,0,0)" />
+  <path d="M 124 360 L 180 360" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="187,360 180,356 180,364 187,360" stroke="rgb(0,0,0)" />
+  <path d="M 248 360 L 304 360" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="311,360 304,356 304,364 311,360" stroke="rgb(0,0,0)" />
+  <path d="M 372 360 L 428 360" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="435,360 428,356 428,364 435,360" stroke="rgb(0,0,0)" />
+  <path d="M 496 360 L 552 360" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="559,360 552,356 552,364 559,360" stroke="rgb(0,0,0)" />
+</svg>

@@ -1,0 +1,33 @@
+blockdiag {
+    group {
+        haskell [color=none, style="0,1", label="Haskell code"];
+        ghc [label="compile"];
+    }
+    0 [shape=none];
+    haskellBin [label="generator", color=none, style="0,1"];
+    group {
+        gen [label="run"];
+        user [color=none, style="0,1", label="user configuration"];
+        cCode [color=none, style="0,1", label="C code"];
+        gcc [label="compile"];
+    }
+    1 [shape=none];
+    system [color=none, style="0,1", label="user binary"];
+    2 [shape=none];
+    group {
+        run;
+        end [color=none, style="0,1", label="Profit"];
+    }
+
+    haskell -> ghc;
+    ghc -> haskellBin [folded];
+    0 -- haskellBin [style="0,1"];
+    haskellBin -> gen [folded];
+    user -> gen;
+    gen -> cCode;
+    cCode -> gcc;
+    1 -- system [style="0,1"];
+    gcc -> system -> run [folded];
+    2 -- run [style="0,1"];
+    run -> end;
+}

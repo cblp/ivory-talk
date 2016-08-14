@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg viewBox="0 0 832 440" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <rect fill="rgb(243,152,0)" height="60" style="filter:url(#filter_blur)" width="336" x="56" y="30" />
+  <rect fill="rgb(243,152,0)" height="60" style="filter:url(#filter_blur)" width="720" x="56" y="190" />
+  <rect fill="rgb(243,152,0)" height="60" style="filter:url(#filter_blur)" width="336" x="248" y="350" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="206" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="643" y="206" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="366" />
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="128" x="64" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="73" x="128" y="66">Haskell code</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="43" x="320" y="66">compile</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="128" x="256" y="120" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="55" x="320" y="146">generator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="19" x="320" y="226">run</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="128" x="64" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="109" x="128" y="226">user configuration</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="128" x="448" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="37" x="512" y="226">C code</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="640" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="43" x="704" y="226">compile</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="128" x="256" y="280" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="67" x="320" y="306">user binary</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="360" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="19" x="320" y="386">run</text>
+  <rect fill="none" height="40" stroke="rgb(0,0,0)" stroke-dasharray="0 1" width="128" x="448" y="360" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="37" x="512" y="386">Profit</text>
+  <path d="M 128 140 L 256 140" fill="none" stroke="rgb(0,0,0)" stroke-dasharray="0 1" />
+  <path d="M 320 160 L 320 192" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="320,199 316,192 324,192 320,199" stroke="rgb(0,0,0)" />
+  <path d="M 128 300 L 256 300" fill="none" stroke="rgb(0,0,0)" stroke-dasharray="0 1" />
+  <path d="M 320 320 L 320 352" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="320,359 316,352 324,352 320,359" stroke="rgb(0,0,0)" />
+  <path d="M 128 380 L 256 380" fill="none" stroke="rgb(0,0,0)" stroke-dasharray="0 1" />
+  <path d="M 192 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 320 80 L 320 112" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="320,119 316,112 324,112 320,119" stroke="rgb(0,0,0)" />
+  <path d="M 384 220 L 440 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,220 440,216 440,224 447,220" stroke="rgb(0,0,0)" />
+  <path d="M 192 220 L 248 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,220 248,216 248,224 255,220" stroke="rgb(0,0,0)" />
+  <path d="M 576 220 L 632 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="639,220 632,216 632,224 639,220" stroke="rgb(0,0,0)" />
+  <path d="M 704 240 L 704 260" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 320 260 L 704 260" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 320 260 L 320 272" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="320,279 316,272 324,272 320,279" stroke="rgb(0,0,0)" />
+  <path d="M 384 380 L 440 380" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,380 440,376 440,384 447,380" stroke="rgb(0,0,0)" />
+</svg>

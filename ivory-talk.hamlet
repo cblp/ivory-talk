@@ -133,6 +133,8 @@ $newline text
         <li> можно транслировать <nobr>не только</nobr> <nobr>в текст</nobr> <nobr>на C</nobr>, #
             <nobr>но и в другие</nobr> представления (например, для автоматических доказательств)
 
+<section data-background-image="codegen.blockdiag.svg">
+
 <section>
     <h3> Ivory: хеллоуворлд
     <pre style="box-shadow: none;">

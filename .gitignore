@@ -1,3 +1,4 @@
+.DS_Store
 .shake/
 .stack-work/
 /code/*.c

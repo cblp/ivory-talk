@@ -1,0 +1,22 @@
+blockdiag {
+    span_height = 200;
+
+    haskell [color=none, style="0,1", label="Haskell code"];
+    ghc [label="compile"];
+    haskellBin [label="generator", color=none, style="0,1"];
+    gen [label="run"];
+    cCode [color=none, style="0,1", label="C code"];
+    gcc [label="compile"];
+    system [color=none, style="0,1", label="user binary"];
+    run;
+    end [color=none, style="0,1", label="Profit"];
+
+    haskell -> ghc;
+    ghc -> haskellBin;
+
+    haskellBin -> gen;
+    gen -> cCode [folded];
+    cCode -> gcc;
+    gcc -> system -> run;
+    run -> end;
+}
