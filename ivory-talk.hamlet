@@ -5,12 +5,10 @@ $newline text
     <p> Юрий Сыровецкий <br> разработчик, Лаборатория Касперского
 
 <section>
-    <p> Мы разрабатываем безопасную платформу:
-    <ul>
-        <li> Kaspersky Security System
-        <li> KasperskyOS
-        <li> Kaspersky Secure Hypervisor
-    <p> На Haskell пишем системные компоненты и инструменты для управления этими компонентами
+    <p> Мы разрабатываем
+    <h3> KasperskyOS
+    <h3> Kaspersky Security System
+    <p> На Haskell пишем системные компоненты и инструменты
 
 <section>
     <h3> Нам нужны
@@ -36,9 +34,7 @@ $newline text
 <section>
     <h3> <nobr>Решение —</nobr> писать <nobr>на C</nobr>
         \ <nobr>и проверять</nobr> код <nobr>на ошибки</nobr> статическим анализатором
-    <ul>
-        <li> не уменьшает необходимость писать тесты
-        <li> не даёт гарантий корректности
+    <p> не даёт гарантий корректности
 
 <section>
     <h3> Решение <nobr>лучше —</nobr> писать <nobr>на Haskell</nobr> метапрограммы,
@@ -50,7 +46,7 @@ $newline text
         <li> просто
         <li> можно уменьшить boilerplate
         <li> <nobr>но нет</nobr> существенных преимуществ перед обычным #
-            С <nobr>с препроцессором</nobr>
+            C <nobr>с препроцессором</nobr>
 
 <section>
     <h2> Способ 1. <br> Библиотеки <br> <code>language-c</code>, <br> <code>language-c-quote</code>
@@ -101,8 +97,8 @@ $newline text
 <section>
     <h3> <code>language-c-quote</code>: достоинства
     <ul>
-        <li> QuasiQuotes — можно писать почти как на C,
-            \ код может читать С-программист, <nobr>не знающий</nobr> Haskell
+        <li> квазицитаты — можно писать почти как на C,
+            \ код может читать C-программист, <nobr>не знающий</nobr> Haskell
         <li> проверка синтаксиса C при написании
         <li> простые типы для работы <nobr>с AST —</nobr>
             \ можно обработать AST привычными средствами (Generics, SYB...)
@@ -111,7 +107,7 @@ $newline text
 <section>
     <h3> <code>language-c-quote</code>: чего не хватает
     <ul>
-        <li> никак не ограничивает нас <nobr>в использовании</nobr> С
+        <li> никак не ограничивает нас <nobr>в использовании</nobr> C
         <li> всё ещё нет проверки корректности кода
             <ul>
                 <li> то, что может проверить GCC, но можно бы ещё раньше
@@ -140,7 +136,7 @@ $newline text
     <h3> Ivory AST
     <ul>
         <li> проще и ближе к семантике, чем AST языка C
-        <li> можно переписывать оптимизировать (Ivory уже это делает)
+        <li> можно переписывать и оптимизировать (Ivory уже это делает)
         <li> можно транслировать <nobr>не только</nobr> <nobr>в текст</nobr> <nobr>на C</nobr>, #
             <nobr>но и в другие</nobr> представления (например, для автоматических доказательств)
         <li> можно инструментировать
@@ -158,12 +154,10 @@ $newline text
             \
             \puts :: Def ('[IString] :-> IInt)
             \puts = importProc "puts" "stdio.h"
-        <code .fragment .haskell>
             \
             \hello msg = package "ivory-hello" $ do
             \    incl puts
             \    incl (cmain msg)
-        <code .fragment>
             \
             \main = do
             \    msg:rest &lt;- getArgs
@@ -229,7 +223,7 @@ $newline text
             \                -- ^ (2) данные не изменяются
             \                  s
             \                  (Array n (Stored Uint32)) ]
-            \                       -- ^ доступно n ячеек памяти
+            \                      -- ^ доступно n ячеек памяти
             \            :-> Uint32)
             \csum = proc "sum" $ \xs -> body $ do
             \    r &lt;- local izero
@@ -367,7 +361,7 @@ $newline text
             <ul>
                 <li> исходного кода на Ivory с помощью SMT-решателя CVC4
                 <li> результирующего кода на C с помощью CBMC
-        <li> <code>Expr</code> как <nobr>символьный тип данных —</nobr> #
+        <li> <code>Expr</code> как символьно-числовой тип <nobr>данных —</nobr> #
             кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода #
             (<code>estimator</code>)
         <li> <nobr>Ivory QQ —</nobr> внешний DSL
