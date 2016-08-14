@@ -301,6 +301,7 @@ $newline text
             \    x &lt;- deref px
             \    y &lt;- deref py
             \    ret $ safeCast y - safeCast x
+            \    -- ^ между прочим, сильная типизация
             \
             \cmain = proc "main" $ body $ do
             \    ...
