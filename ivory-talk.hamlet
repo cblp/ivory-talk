@@ -190,7 +190,7 @@ $newline text
 <section data-background-image="codegen.blockdiag.svg">
 
 <section>
-    <h3> Ivory: использование Haskell <nobr>для умных</nobr> макросов
+    <h3> Ivory: использование Haskell <nobr>для «умных</nobr> макросов»
     <pre>
         <code>
             \class CPrint a where
@@ -208,7 +208,7 @@ $newline text
             \    ret 0
 
 <section>
-    <h3> Ivory: cгенерированный код умных макросов
+    <h3> Ivory: cгенерированный код «умных макросов»
     <pre>
         <code>
             \int32_t main(void) {
@@ -344,12 +344,13 @@ $newline text
     <h3> Ivory: достоинства
     <ul>
         <li> корректность кода на входе гарантируется системой типов Haskell
-        <li> корректность кода на выходе гарантируется библиотекой #
+        <li> корректность синтаксиса на выходе гарантируется библиотекой #
             <code>language-c-quote</code>
         <li> предусмотрены способы защиты от многих UB и UB
-        <li> исправляются проблемы слабой типизации C
-        <li> вместо «костыля» <nobr>CPP —</nobr> хорошо типизированные #
-            полиморфные макросы на Haskell
+        <li> исправляются проблемы слабой <nobr>типизации —</nobr> #
+            используется сильно типизированное подмножество
+        <li> вместо опасного <nobr>препроцессора —</nobr> хорошо типизированные #
+            полиморфные «макросы» на Haskell
             <ul>
                 <li> имитация полиморфизма в C
 
@@ -367,8 +368,9 @@ $newline text
                 <li> исходного кода на Ivory с помощью SMT-решателя CVC4
                 <li> результирующего кода на C с помощью CBMC
         <li> <code>Expr</code> как <nobr>символьный тип данных —</nobr> #
-            кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода (estimator)
-        <li> <code>Ivory.Language.Syntax.Concrete.QQ</code> — внешний DSL
+            кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода #
+            (<code>estimator</code>)
+        <li> <nobr>Ivory QQ —</nobr> внешний DSL
 
 <section>
     <h3> Ivory: недостатки фундаметальные
