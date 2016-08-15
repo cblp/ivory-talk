@@ -53,8 +53,8 @@ $doctype 5
         <![endif]-->
 
     <body>
-        <div class="reveal">
-            <div class="slides">
+        <div .reveal>
+            <div .slides>
                 ^{slides}
             <img .logo src="Kaspersky_RGB_POS_PNG.png">
 

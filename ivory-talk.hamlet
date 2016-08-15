@@ -267,7 +267,7 @@ $newline text
                 сигнатура <nobr>в C</nobr>
             <td width="100%">
                 <pre>
-                    <code class=c>
+                    <code .c>
                         \void
                         \qsort(
                         \    void * base,
