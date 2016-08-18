@@ -389,7 +389,25 @@ $newline text
         <li> <code>Expr</code> как символьно-числовой тип <nobr>данных —</nobr> #
             кодогенерация <nobr>из любого</nobr> достаточно обобщённого кода #
             (<code>estimator</code>)
-        <li> <nobr>Ivory QQ —</nobr> внешний DSL
+
+<section>
+    <h4> <nobr>Ivory QQ —</nobr> внешний DSL
+    <pre>
+        <code>
+            \import (stdio.h, printf) int32_t printf2(string x, int32_t y)
+            \import foo.h &int32_t[4] const anArea3[]
+            \
+            \bar = 3 + 2; -- A top level definition
+            \type Boo = int8_t;
+            \
+            \struct Bar00 {
+            \    &int32_t aBar00;
+            \}
+            \
+            \uint8_t foo12(* uint8_t a, G*uint8_t b, * uint8_t c, S* uint8_t d) {
+            \    store b as *a;
+            \    return *b + *c + *d;
+            \}
 
 <section>
     <h3> Ivory: недостатки фундаметальные
