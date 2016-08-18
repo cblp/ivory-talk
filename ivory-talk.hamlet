@@ -220,7 +220,7 @@ $newline text
 <section>
     <h4> Пример: безопасная сумма элементов массива
     <pre>
-        <code>
+        <code style="max-height: none;">
             \csum :: KnownNat n
             \     => Def ('[ ConstRef -- (1) указатель не noll
             \                -- ^ (2) данные не изменяются
@@ -230,10 +230,11 @@ $newline text
             \            :-> Uint32)
             \csum = proc "sum" $ \xs -> body $ do
             \    r &lt;- local izero
+            \    -- ^ (3) -- переменная обязательно инициализирована
             \    arrayMap $ \i -> do
             \        s &lt;- deref r
             \        x &lt;- deref (xs ! i)
-            \        -- ^ (3) -- i :: Ix n
+            \        -- ^ (4) -- i :: Ix n
             \        -- значения 'i' ограничены размером массива
             \        -- не произойдёт выход за границы массива
             \        store r (s + x)
@@ -336,6 +337,27 @@ $newline text
             \        (fromInteger $ natVal (Proxy :: Proxy n))
             \        (sizeOf (Proxy :: Proxy area))
             \        (ivoryCast' (procPtr compareProc))
+
+<section>
+    <h4> <code>qsortBy</code>: сгенерированный код
+    <pre>
+        <code>
+            \int32_t cmp_u8_rev(const uint8_t *n_var0, const uint8_t *n_var1) {
+            \    uint8_t n_deref0 = *n_var0;
+            \    uint8_t n_deref1 = *n_var1;
+            \
+            \    return (int32_t) ((int32_t) n_deref1 - (int32_t) n_deref0);
+            \}
+            \
+            \int32_t main(void) {
+            \    uint8_t n_local0[32U] = {...};
+            \    uint8_t *n_ref1 = n_local0;
+            \    char *n_cse0 = (char *) n_ref1;
+            \
+            \    qsort((void *) n_ref1, (uint64_t) 32U,
+            \        (uint64_t) sizeof(uint8_t), (void *) cmp_u8_rev);
+            \    return (int32_t) 0;
+            \}
 
 <section>
     <h3> Ivory: достоинства
