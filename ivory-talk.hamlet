@@ -379,6 +379,54 @@ $newline text
             \}
 
 <section>
+    <h3> Типичные ошибки в C и их решение в Ivory (1/3)
+    <table>
+        <tr>
+            <td> забытый <code>break</code> <nobr>в <code>switch</code></nobr>
+            <td> невозможно: нет <code>switch</code>, есть <code>cond</code> с другим синтаксисом
+        <tr>
+            <td> «<code>=</code>» вместо «<code>==</code>»
+            <td> невозможно: совсем разные типы
+        <tr>
+            <td> выход <nobr>за границы</nobr> массива
+            <td> невозможно: тип <code>Ix</code>
+        <tr>
+            <td> ошибки <nobr>с ограничениями</nobr> циклов
+            <td> почти невозможно: тип <code>Ix</code>
+
+<section>
+    <h3> Типичные ошибки в C и их решение в Ivory (2/3)
+    <table>
+        <tr>
+            <td> забытая инициализация
+            <td> почти невозможно
+        <tr>
+            <td> забытая инициализация указателей
+            <td> невозможно
+        <tr>
+            <td> обращение <nobr>по нулевому</nobr> указателю
+            <td> невозможно: типы <code>Ptr</code> <nobr>и <code>Ref</code></nobr>
+        <tr>
+            <td> выход указателя <nobr>из области</nobr> владения
+            <td> невозможно: scope-параметр типа <code>Ptr</code>/<code>Ref</code>
+
+<section>
+    <h3> Типичные ошибки в C и их решение в Ivory (3/3)
+    <table>
+        <tr>
+            <td> ошибки в макросах препроцессора
+            <td> невозможно, если использовать Haskell вместо него
+        <tr>
+            <td> ошибки типов, целые/дробные
+            <td> невозможно: Haskell
+        <tr>
+            <td> лишние/отсутствующие «;», «{}»
+            <td> невозможно
+        <tr>
+            <td> надежда на порядок вычисления аргументов функции
+            <td> невозможно: запрещено
+
+<section>
     <h3> Ivory: достоинства
     <ol>
         <li> обнаружение проблем на ранней стадии
@@ -438,8 +486,8 @@ $newline text
     <pre>
         <code .haskell>
             \do  exampleArray &lt;- local
-            \        (iarray $ map ival [0, 1, 2, 3]
-            \        :: Init (Array 4 (Stored Uint32)))
+            \        ( iarray $ map ival [0, 1, 2, 3]
+            \          :: Init (Array 4 (Stored Uint32)) )
             \    x &lt;- deref (exampleArray ! 4)
             \    call_ printf "%u\n" x
     <p .fragment> компилируется
